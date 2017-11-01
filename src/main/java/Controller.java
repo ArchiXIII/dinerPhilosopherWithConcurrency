@@ -22,7 +22,7 @@ public class Controller {
                     Philosopher philosopher = new Philosopher(forks[firstFork], forks[secondFork], numberPhilosopher);
                     while (true) {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep((int) (Math.random() * 2000));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

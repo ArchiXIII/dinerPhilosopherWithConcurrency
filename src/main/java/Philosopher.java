@@ -15,20 +15,11 @@ public class Philosopher {
     }
 
     public void act(){
-        int attemptsToTake = 0;
-        while (!leftFork.isTaken() || !rightFork.isTaken()){
-            if(!leftFork.isTaken()){
-                leftFork.takeFork();
-                leftMy = true;
-            }
-            if (!rightFork.isTaken()) {
-                rightFork.takeFork();
-                rightMy = true;
-            }
-            attemptsToTake++;
-            if(attemptsToTake > 3) {
-                putForks();
-            }
+        if (leftFork.tryTakeFork()) {
+            leftMy = true;
+        }
+        if (rightFork.tryTakeFork()) {
+            rightMy = true;
         }
         if(leftMy && rightMy) {
             eat();
@@ -40,9 +31,11 @@ public class Philosopher {
     private void putForks(){
         if (leftMy) {
             leftFork.putFork();
+            leftMy = false;
         }
         if (rightMy) {
             rightFork.putFork();
+            rightMy = false;
         }
     }
 
